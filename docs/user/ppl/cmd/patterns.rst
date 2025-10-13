@@ -27,11 +27,11 @@ patterns <field> [by byClause...] [method=simple_pattern | brain] [mode=label | 
 
 * field: mandatory. The text(string) field to analyze for patterns.
 * byClause: optional. Fields or scalar functions used to group logs for labeling/aggregation.
-* method: optional. Algorithm choice: ``simple_pattern`` (default) or ``brain``. The method is configured by the setting ``plugins.ppl.pattern.method``.
-* mode: optional. Output mode: ``label`` (default) or ``aggregation``. The mode is configured by the setting ``plugins.ppl.pattern.mode``.
-* max_sample_count: optional. Max sample logs returned per pattern in aggregation mode (default: 10). The max_sample_count is configured by the setting ``plugins.ppl.pattern.max.sample.count``.
-* buffer_limit: optional. Safeguard parameter for ``brain`` algorithm to limit internal temporary buffer size (default: 100,000, min: 50,000). The buffer_limit is configured by the setting ``plugins.ppl.pattern.buffer.limit``.
-* show_numbered_token: optional. The flag to turn on numbered token output format (default: false). The show_numbered_token is configured by the setting ``plugins.ppl.pattern.show.numbered.token``.
+* method: optional. Algorithm choice: ``simple_pattern`` or ``brain``. The method is configured by the setting ``plugins.ppl.pattern.method``. **Default:** simple_pattern.
+* mode: optional. Output mode: ``label`` or ``aggregation``. The mode is configured by the setting ``plugins.ppl.pattern.mode``. **Default:** label.
+* max_sample_count: optional. Max sample logs returned per pattern in aggregation mode. The max_sample_count is configured by the setting ``plugins.ppl.pattern.max.sample.count``. **Default:** 10.
+* buffer_limit: optional. Safeguard parameter for ``brain`` algorithm to limit internal temporary buffer size (min: 50,000). The buffer_limit is configured by the setting ``plugins.ppl.pattern.buffer.limit``. **Default:** 100,000.
+* show_numbered_token: optional. The flag to turn on numbered token output format. The show_numbered_token is configured by the setting ``plugins.ppl.pattern.show.numbered.token``. **Default:** false.
 * new_field: Alias of the output pattern field. (default: "patterns_field").
 * algorithm parameters: optional. Algorithm-specific tuning:
 

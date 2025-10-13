@@ -19,7 +19,7 @@ Syntax
 dedup [int] <field-list> [keepempty=<bool>] [consecutive=<bool>]
 
 
-* int: optional. The ``dedup`` command retains multiple events for each combination when you specify <int>. The number for <int> must be greater than 0. If you do not specify a number, only the first occurring event is kept. All other duplicates are removed from the results. **Default:** 1
+* int: optional. The ``dedup`` command retains multiple events for each combination when you specify <int>. The number for <int> must be greater than 0. If you do not specify a number, only the first occurring event is kept. All other duplicates are removed from the results. **Default:** 1.
 * keepempty: optional. if true, keep the document if the any field in the field-list has NULL value or field is MISSING. **Default:** false.
 * consecutive: optional. If set to true, removes only events with duplicate combinations of values that are consecutive. **Default:** false.
 * field-list: mandatory. The comma-delimited field list. At least one field is required.

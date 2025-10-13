@@ -11,13 +11,7 @@ subquery (aka subsearch)
 
 Description
 ============
-| (Experimental)
-| (From 3.0.0)
 | The subquery (aka subsearch) commands contain 4 types: ``InSubquery``, ``ExistsSubquery``, ``ScalarSubquery`` and ``RelationSubquery``. The first three are expressions, they are used in WHERE clause (``where <boolean expression>``) and search filter(``search source=* <boolean expression>``). ``RelationSubquery`` is not an expression, it is a statement.
-
-Version
-=======
-3.0.0
 
 Syntax
 ======
@@ -38,33 +32,6 @@ ScalarSubquery::
 RelationSubquery::
 
     | join ON condition [ source=... | ... | ... ]
-
-
-Configuration
-=============
-This command requires Calcite enabled. In 3.0.0-beta, as an experimental the Calcite configuration is disabled by default.
-
-Enable Calcite::
-
-	>> curl -H 'Content-Type: application/json' -X PUT localhost:9200/_plugins/_query/settings -d '{
-	  "transient" : {
-	    "plugins.calcite.enabled" : true
-	  }
-	}'
-
-Result set::
-
-    {
-      "acknowledged": true,
-      "persistent": {
-        "plugins": {
-          "calcite": {
-            "enabled": "true"
-          }
-        }
-      },
-      "transient": {}
-    }
 
 Usage
 =====

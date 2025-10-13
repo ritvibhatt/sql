@@ -99,27 +99,11 @@ PPL query::
 Example 4: Calculate the weighted moving average on one field.
 =================================================================================
 
-Version
--------
-3.1.0
-
-Configuration
--------------
-wma algorithm requires Calcite enabled.
-
-Enable Calcite:
-
-    >> curl -H 'Content-Type: application/json' -X PUT localhost:9200/_plugins/_query/settings -d '{
-      "persistent" : {
-        "plugins.calcite.enabled" : true
-      }
-    }'
-
 The example shows how to calculate the weighted moving average on one field.
 
 PPL query::
 
-    PPL> source=accounts | trendline wma(2, account_number)  | fields account_number_trendline;
+    os> source=accounts | trendline wma(2, account_number)  | fields account_number_trendline;
     fetched rows / total rows = 4/4
     +--------------------------+
     | account_number_trendline |
@@ -132,4 +116,4 @@ PPL query::
 
 Limitations
 ===========
-Starting with version 3.1.0, the ``trendline`` command requires all values in the specified ``field`` to be non-null. Any rows with null values present in the calculation field will be automatically excluded from the command's output.
+The ``trendline`` command requires all values in the specified ``field`` to be non-null. Any rows with null values present in the calculation field will be automatically excluded from the command's output.

@@ -13,10 +13,6 @@ Description
 ============
 | The ``timechart`` command creates a time-based aggregation of data. It groups data by time intervals and optionally by a field, then applies an aggregation function to each group. The results are returned in an unpivoted format with separate rows for each time-field combination.
 
-Version
-=======
-3.3.0
-
 Syntax
 ============
 
@@ -140,7 +136,7 @@ This example calculates the average CPU usage for each minute without grouping b
 
 PPL query::
 
-    PPL> source=events | timechart span=1m avg(cpu_usage)
+    os> source=events | timechart span=1m avg(cpu_usage)
     fetched rows / total rows = 5/5
     +---------------------+------------------+
     | @timestamp          | avg(cpu_usage)   |
@@ -159,7 +155,7 @@ This example calculates the average CPU usage for each second and groups them by
 
 PPL query::
 
-    PPL> source=events | timechart span=1s avg(cpu_usage) by region
+    os> source=events | timechart span=1s avg(cpu_usage) by region
     fetched rows / total rows = 5/5
     +---------------------+---------+------------------+
     | @timestamp          | region  | avg(cpu_usage)   |
@@ -178,7 +174,7 @@ This example counts events for each second and groups them by region, showing ze
 
 PPL query::
 
-    PPL> source=events | timechart span=1s count() by region
+    os> source=events | timechart span=1s count() by region
     fetched rows / total rows = 15/15
     +---------------------+---------+-------+
     | @timestamp          | region  | count |
@@ -238,7 +234,7 @@ To display all distinct values without any limit, set limit=0:
 
 PPL query::
 
-    PPL> source=events_many_hosts | timechart span=1h limit=0 count() by host
+    os> source=events_many_hosts | timechart span=1h limit=0 count() by host
     fetched rows / total rows = 11/11
     +---------------------+--------+-------+
     | @timestamp          | host   | count |
@@ -265,7 +261,7 @@ Limit to top 10 hosts without OTHER category (useother=false):
 
 PPL query::
 
-    PPL> source=events_many_hosts | timechart span=1h useother=false count() by host
+    os> source=events_many_hosts | timechart span=1h useother=false count() by host
     fetched rows / total rows = 10/10
     +---------------------+--------+-------+
     | @timestamp          | host   | count |
@@ -289,7 +285,7 @@ Limit to top 3 hosts with OTHER category (default useother=true):
 
 PPL query::
 
-    PPL> source=events_many_hosts | timechart span=1h limit=3 avg(cpu_usage) by host
+    os> source=events_many_hosts | timechart span=1h limit=3 avg(cpu_usage) by host
     fetched rows / total rows = 4/4
     +---------------------+--------+------------------+
     | @timestamp          | host   | avg(cpu_usage)   |
@@ -304,7 +300,7 @@ Limit to top 3 hosts without OTHER category (useother=false):
 
 PPL query::
 
-    PPL> source=events_many_hosts | timechart span=1h limit=3 useother=false avg(cpu_usage) by host
+    os> source=events_many_hosts | timechart span=1h limit=3 useother=false avg(cpu_usage) by host
     fetched rows / total rows = 3/3
     +---------------------+--------+------------------+
     | @timestamp          | host   | avg(cpu_usage)   |
@@ -321,7 +317,7 @@ This example shows how null values in the "by" field are treated as a separate c
 
 PPL query::
 
-    PPL> source=events_null | timechart span=1h count() by host
+    os> source=events_null | timechart span=1h count() by host
     fetched rows / total rows = 4/4
     +---------------------+--------+-------+
     | @timestamp          | host   | count |

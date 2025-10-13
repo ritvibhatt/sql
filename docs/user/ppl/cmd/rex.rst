@@ -13,19 +13,15 @@ Description
 ============
 | The ``rex`` command extracts fields from a raw text field using regular expression named capture groups.
 
-Version
-=======
-3.3.0
-
 Syntax
 ============
 rex [mode=<mode>] field=<field> <pattern> [max_match=<int>] [offset_field=<string>]
 
 * field: mandatory. The field must be a string field to extract data from.
 * pattern: mandatory string. The regular expression pattern with named capture groups used to extract new fields. Pattern must contain at least one named capture group using ``(?<name>pattern)`` syntax.
-* mode: optional. Either ``extract`` (default) or ``sed``.
+* mode: optional. Either ``extract`` or ``sed``. **Default:** extract.
 
-  - **extract mode** (default): Creates new fields from regular expression named capture groups. This is the standard field extraction behavior.
+  - **extract mode**: Creates new fields from regular expression named capture groups. This is the standard field extraction behavior.
   - **sed mode**: Performs text substitution on the field using sed-style patterns:
 
     - ``s/pattern/replacement/`` - Replace first occurrence
@@ -34,7 +30,7 @@ rex [mode=<mode>] field=<field> <pattern> [max_match=<int>] [offset_field=<strin
     - ``y/from_chars/to_chars/`` - Character-by-character transliteration
     - Backreferences: ``\1``, ``\2``, etc. reference captured groups in replacement
 
-* max_match: optional integer (default=1). Maximum number of matches to extract. If greater than 1, extracted fields become arrays. The value 0 means unlimited matches, but is automatically capped to the configured limit (default: 10, configurable via ``plugins.ppl.rex.max_match.limit``).
+* max_match: optional integer. Maximum number of matches to extract. If greater than 1, extracted fields become arrays. The value 0 means unlimited matches, but is automatically capped to the configured limit (default: 10, configurable via ``plugins.ppl.rex.max_match.limit``). **Default:** 1.
 * offset_field: optional string. Field name to store the character offset positions of matches. Only available in extract mode.
 
 Example 1: Basic Field Extraction

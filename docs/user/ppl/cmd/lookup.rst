@@ -17,61 +17,16 @@ Description
 You can extend fields of an index with values from a dimension table, append or replace values when lookup condition is matched.
 As an alternative of join command, lookup command is more suitable for enriching the source data with a static dataset.
 
-Version
-=======
-3.0.0
-
 Syntax
 ======
 LOOKUP <lookupIndex> (<lookupMappingField> [AS <sourceMappingField>])... [(REPLACE | APPEND) (<inputField> [AS <outputField>])...]
 
 * lookupIndex: mandatory. The name of lookup index (dimension table).
 * lookupMappingField: mandatory. A mapping key in \<lookupIndex\>, analogy to a join key from right table. You can specify multiple \<lookupMappingField\> with comma-delimited.
-* sourceMappingField: optional. A mapping key from source (left side), analogy to a join key from left side. If you don't specify any \<sourceMappingField\>, its default value is \<lookupMappingField\>.
+* sourceMappingField: optional. A mapping key from source (left side), analogy to a join key from left side. **Default:** \<lookupMappingField\>.
 * inputField: optional. A field in \<lookupIndex\> where matched values are applied to result output. You can specify multiple \<inputField\> with comma-delimited. If you don't specify any \<inputField\>, all fields expect \<lookupMappingField\> from \<lookupIndex\> where matched values are applied to result output.
 * outputField: optional. A field of output. You can specify zero or multiple \<outputField\>. If you specify \<outputField\> with an existing field name in source query, its values will be replaced or appended by matched values from \<inputField\>. If the field specified in \<outputField\> is a new field, in REPLACE strategy, an extended new field will be applied to the results, but fail in APPEND strategy.
 * REPLACE | APPEND: optional. The output strategies. Default is REPLACE. If you specify REPLACE, matched values in \<lookupIndex\> field overwrite the values in result. If you specify APPEND, matched values in \<lookupIndex\> field only append to the missing values in result.
-
-Configuration
-=============
-This command requires Calcite enabled. In 3.0.0-beta, as an experimental the Calcite configuration is disabled by default.
-
-Enable Calcite::
-
-	>> curl -H 'Content-Type: application/json' -X PUT localhost:9200/_plugins/_query/settings -d '{
-	  "transient" : {
-	    "plugins.calcite.enabled" : true
-	  }
-	}'
-
-Result set::
-
-    {
-      "acknowledged": true,
-      "persistent": {
-        "plugins": {
-          "calcite": {
-            "enabled": "true"
-          }
-        }
-      },
-      "transient": {}
-    }
-
-
-Usage
-=====
-
-Lookup::
-
-    source = table1 | lookup table2 id
-    source = table1 | lookup table2 id, name
-    source = table1 | lookup table2 id as cid, name
-    source = table1 | lookup table2 id as cid, name replace dept as department
-    source = table1 | lookup table2 id as cid, name replace dept as department, city as location
-    source = table1 | lookup table2 id as cid, name append dept as department
-    source = table1 | lookup table2 id as cid, name append dept as department, city as location
-
 
 Example 1: replace
 ==================

@@ -18,7 +18,7 @@ Syntax
 ============
 eval <field>=<expression> ["," <field>=<expression> ]...
 
-* field: mandatory. If the field name not exist, a new field is added. If the field name already exists, it will be overrided.
+* field: mandatory. If the field name not exist, a new field is added. If the field name already exists, it will be overridden.
 * expression: mandatory. Any expression support by the system.
 
 Example 1: Create the new field

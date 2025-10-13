@@ -45,7 +45,7 @@ stats [bucket_nullable=bool] <aggregation>... [by-clause]
 
 * aggregation: mandatory. A aggregation function. The argument of aggregation must be field.
 
-* bucket_nullable: optional (since 3.3.0). Controls whether the stats command includes null buckets in group-by aggregations. When set to ``false``, the aggregation ignores records where the group-by field is null, resulting in faster performance by excluding null bucket. The default value of ``bucket_nullable`` is determined by ``plugins.ppl.syntax.legacy.preferred``:
+* bucket_nullable: optional. Controls whether the stats command includes null buckets in group-by aggregations. When set to ``false``, the aggregation ignores records where the group-by field is null, resulting in faster performance by excluding null bucket. The default value of ``bucket_nullable`` is determined by ``plugins.ppl.syntax.legacy.preferred``:
 
  * When ``plugins.ppl.syntax.legacy.preferred=true``, ``bucket_nullable`` defaults to ``true``
  * When ``plugins.ppl.syntax.legacy.preferred=false``, ``bucket_nullable`` defaults to ``false``
@@ -83,18 +83,6 @@ stats [bucket_nullable=bool] <aggregation>... [by-clause]
 +----------------------------+
 | year (y)                   |
 +----------------------------+
-
-Configuration
-=============
-Some aggregation functions require Calcite to be enabled for proper functionality. To enable Calcite, use the following command:
-
-Enable Calcite::
-
-    >> curl -H 'Content-Type: application/json' -X PUT localhost:9200/_plugins/_query/settings -d '{
-      "persistent" : {
-        "plugins.calcite.enabled" : true
-      }
-    }'
 
 Aggregation Functions
 =====================
@@ -185,8 +173,6 @@ Usage: MAX(expr). Returns the maximum value of expr.
 
 For non-numeric fields, values are sorted lexicographically.
 
-Note: Non-numeric field support requires Calcite to be enabled (see `Configuration`_ section above). Available since version 3.3.0.
-
 Example::
 
     os> source=accounts | stats max(age);
@@ -216,8 +202,6 @@ Description
 Usage: MIN(expr). Returns the minimum value of expr.
 
 For non-numeric fields, values are sorted lexicographically.
-
-Note: Non-numeric field support requires Calcite to be enabled (see `Configuration`_ section above). Available since version 3.3.0.
 
 Example::
 
@@ -317,8 +301,6 @@ DISTINCT_COUNT_APPROX
 Description
 >>>>>>>>>>>
 
-Version: 3.1.0
-
 Usage: DISTINCT_COUNT_APPROX(expr). Return the approximate distinct count value of the expr, using the hyperloglog++ algorithm.
 
 Example::
@@ -378,8 +360,6 @@ Example::
 Percentile Shortcut Functions
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-Version: 3.3.0
-
 For convenience, OpenSearch PPL provides shortcut functions for common percentiles:
 
 - ``PERC<percent>(expr)`` - Equivalent to ``PERCENTILE(expr, <percent>)``
@@ -411,11 +391,7 @@ MEDIAN
 Description
 >>>>>>>>>>>
 
-Version: 3.3.0
-
 Usage: MEDIAN(expr). Returns the median (50th percentile) value of `expr`. This is equivalent to ``PERCENTILE(expr, 50)``.
-
-Note: This function requires Calcite to be enabled (see `Configuration`_ section above).
 
 Example::
 
@@ -433,14 +409,10 @@ EARLIEST
 Description
 >>>>>>>>>>>
 
-Version: 3.3.0
-
 Usage: EARLIEST(field [, time_field]). Return the earliest value of a field based on timestamp ordering.
 
 * field: mandatory. The field to return the earliest value for.
 * time_field: optional. The field to use for time-based ordering. Defaults to @timestamp if not specified.
-
-Note: This function requires Calcite to be enabled (see `Configuration`_ section above).
 
 Example::
 
@@ -470,14 +442,10 @@ LATEST
 Description
 >>>>>>>>>>>
 
-Version: 3.3.0
-
 Usage: LATEST(field [, time_field]). Return the latest value of a field based on timestamp ordering.
 
 * field: mandatory. The field to return the latest value for.
 * time_field: optional. The field to use for time-based ordering. Defaults to @timestamp if not specified.
-
-Note: This function requires Calcite to be enabled (see `Configuration`_ section above).
 
 Example::
 
@@ -507,13 +475,9 @@ FIRST
 Description
 >>>>>>>>>>>
 
-Version: 3.3.0
-
 Usage: FIRST(field). Return the first non-null value of a field based on natural document order. Returns NULL if no records exist, or if all records have NULL values for the field.
 
 * field: mandatory. The field to return the first value for.
-
-Note: This function requires Calcite to be enabled (see `Configuration`_ section above).
 
 Example::
 
@@ -543,13 +507,9 @@ LAST
 Description
 >>>>>>>>>>>
 
-Version: 3.3.0
-
 Usage: LAST(field). Return the last non-null value of a field based on natural document order. Returns NULL if no records exist, or if all records have NULL values for the field.
 
 * field: mandatory. The field to return the last value for.
-
-Note: This function requires Calcite to be enabled (see `Configuration`_ section above).
 
 Example::
 
@@ -577,8 +537,6 @@ LIST
 
 Description
 >>>>>>>>>>>
-
-Version: 3.3.0 (Calcite engine only)
 
 Usage: LIST(expr). Collects all values from the specified expression into an array. Values are converted to strings, nulls are filtered, and duplicates are preserved. 
 The function returns up to 100 values with no guaranteed ordering.
@@ -611,8 +569,6 @@ VALUES
 
 Description
 >>>>>>>>>>>
-
-Version: 3.3.0 (Calcite engine only)
 
 Usage: VALUES(expr). Collects all unique values from the specified expression into a sorted array. Values are converted to strings, nulls are filtered, and duplicates are removed.
 

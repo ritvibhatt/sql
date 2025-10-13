@@ -11,7 +11,6 @@ expand
 
 Description
 ============
-| (Experimental)
 
 Use the ``expand`` command on a nested array field to transform a single
 document into multiple documents—each containing one element from the array.
@@ -25,10 +24,6 @@ The expand command generates one row per element in the specified array field:
   of the original field name.
 * If the specified field is an empty array, the row is retained with the
   expanded field set to null.
-
-Version
-=======
-Since 3.1.0
 
 Syntax
 ======
@@ -70,14 +65,3 @@ Limitations
 * The ``expand`` command currently only supports nested arrays. Primitive
   fields storing arrays are not supported. E.g. a string field storing an array
   of strings cannot be expanded with the current implementation.
-* The command works only with Calcite enabled. This can be set with the
-  following command:
-
-  .. code-block::
-
-    PUT /_cluster/settings
-    {
-      "persistent":{
-          "plugins.calcite.enabled": true
-      }
-    }

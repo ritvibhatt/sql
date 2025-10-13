@@ -20,9 +20,9 @@ explain <mode> queryStatement
 
 * mode: optional. There are 4 explain modes: "simple", "standard", "cost", "extended". If mode is not provided, "standard" will be set by default.
  * standard: The default mode. Display logical and physical plan with pushdown information (DSL).
- * simple: Display the logical plan tree without attributes. Only works with Calcite.
- * cost: Display the standard information plus plan cost attributes. Only works with Calcite.
- * extended: Display the standard information plus generated code. Only works with Calcite.
+ * simple: Display the logical plan tree without attributes.
+ * cost: Display the standard information plus plan cost attributes.
+ * extended: Display the standard information plus generated code.
 * queryStatement: mandatory. A PPL query to explain.
 
 
@@ -33,7 +33,7 @@ When Calcite is disabled (plugins.calcite.enabled=false), explaining a PPL query
 
 PPL query::
 
-    PPL> explain source=state_country | where country = 'USA' OR country = 'England' | stats count() by country
+    os> explain source=state_country | where country = 'USA' OR country = 'England' | stats count() by country
 
 Explain::
 
@@ -62,7 +62,7 @@ When Calcite is enabled (plugins.calcite.enabled=true), explaining a PPL query w
 
 PPL query::
 
-    PPL> explain source=state_country | where country = 'USA' OR country = 'England' | stats count() by country
+    os> explain source=state_country | where country = 'USA' OR country = 'England' | stats count() by country
 
 Explain::
 
@@ -87,7 +87,7 @@ When Calcite is enabled (plugins.calcite.enabled=true), you can explain a PPL qu
 
 PPL query::
 
-    PPL> explain simple source=state_country | where country = 'USA' OR country = 'England' | stats count() by country
+    os> explain simple source=state_country | where country = 'USA' OR country = 'England' | stats count() by country
 
 Explain::
 
@@ -108,7 +108,7 @@ When Calcite is enabled (plugins.calcite.enabled=true), you can explain a PPL qu
 
 PPL query::
 
-    PPL> explain cost source=state_country | where country = 'USA' OR country = 'England' | stats count() by country
+    os> explain cost source=state_country | where country = 'USA' OR country = 'England' | stats count() by country
 
 Explain::
 
@@ -132,7 +132,7 @@ When Calcite is enabled (plugins.calcite.enabled=true), you can explain a PPL qu
 
 PPL query::
 
-    PPL> explain extended source=state_country | where country = 'USA' OR country = 'England' | stats count() by country
+    os> explain extended source=state_country | where country = 'USA' OR country = 'England' | stats count() by country
 
 Explain::
 

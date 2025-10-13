@@ -9,11 +9,6 @@ bin
    :depth: 2
 
 
-.. note::
-   
-   Available since version 3.3
-
-
 Description
 ============
 | The ``bin`` command groups numeric values into buckets of equal intervals, making it useful for creating histograms and analyzing data distribution. It takes a numeric field and generates a new field with values that represent the lower bound of each bucket.
@@ -232,9 +227,6 @@ Define the range for binning using an effective range expansion algorithm. The k
 Examples
 ========
 
-Span Parameter Examples
-=======================
-
 Example 1: Basic numeric span
 ==============================
 
@@ -294,9 +286,6 @@ PPL query::
     | 20000.0-200000.0 |
     +------------------+
 
-Bins Parameter Examples
-=======================
-
 Example 5: Basic bins parameter
 ================================
 
@@ -340,9 +329,6 @@ PPL query::
     | 28-29 | 13             |
     +-------+----------------+
 
-Minspan Parameter Examples
-==========================
-
 Example 8: Basic minspan
 =========================
 
@@ -370,9 +356,6 @@ PPL query::
     |--------|
     | 0-1000 |
     +--------+
-
-Start/End Parameter Examples
-============================
 
 Example 10: Start and end range
 ================================
@@ -415,9 +398,6 @@ PPL query::
     | 28-29 |
     | 33-34 |
     +-------+
-
-Time-based Examples
-===================
 
 Example 13: Hour span
 ======================
@@ -479,9 +459,6 @@ PPL query::
     | 2025-07-24 00:00:00 | 9187  |
     +---------------------+-------+
 
-Aligntime Parameter Examples
-============================
-
 Example 17: Aligntime with time modifier
 =========================================
 
@@ -511,9 +488,6 @@ PPL query::
     | 2025-07-28 00:40:00 | 7623  |
     | 2025-07-28 00:40:00 | 9187  |
     +---------------------+-------+
-
-Default Binning Example
-=======================
 
 Example 19: Default behavior (no parameters)
 ==============================================

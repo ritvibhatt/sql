@@ -1,5 +1,5 @@
 =============
-evenstats
+eventstats
 =============
 
 .. rubric:: Table of contents
@@ -11,9 +11,7 @@ evenstats
 
 Description
 ============
-| (Experimental)
-| (From 3.1.0)
-| Using ``evenstats`` command to enriches your event data with calculated summary statistics. It operates by analyzing specified fields within your events, computing various statistical measures, and then appending these results as new fields to each original event.
+| Using ``eventstats`` command to enriches your event data with calculated summary statistics. It operates by analyzing specified fields within your events, computing various statistical measures, and then appending these results as new fields to each original event.
 
 | Key aspects of `eventstats`:
 
@@ -33,12 +31,6 @@ The ``stats`` and ``eventstats`` commands are both used for calculating statisti
 * Use Cases:
  * ``stats``: Best for creating summary reports or dashboards. Often used as a final command to summarize results.
  * ``eventstats``: Useful when you need to enrich events with statistical context for further analysis or filtering. Can be used mid-search to add statistics that can be used in subsequent commands.
-
-
-Version
-=======
-3.1.0
-
 
 Syntax
 ======
@@ -276,7 +268,7 @@ Example::
     +----------------+--------+-----+--------------------+
 
 
-DISTINCT_COUNT, DC(Since 3.3)
+DISTINCT_COUNT, DC
 ------------------
 
 Description
@@ -300,7 +292,7 @@ Example::
     | 18             | M      | MD    | 33  | 3               | 3             |
     +----------------+--------+-------+-----+-----------------+---------------+
 
-EARLIEST (Since 3.3)
+EARLIEST
 ---------------------
 
 Description
@@ -310,8 +302,6 @@ Usage: EARLIEST(field [, time_field]). Return the earliest value of a field base
 
 * field: mandatory. The field to return the earliest value for.
 * time_field: optional. The field to use for time-based ordering. Defaults to @timestamp if not specified.
-
-Note: This function requires Calcite to be enabled (see `Configuration`_ section above).
 
 Example::
 
@@ -348,7 +338,7 @@ Example with custom time field::
     +---------------------+------------+----------+------------------------------+
 
 
-LATEST (Since 3.3)
+LATEST
 -------------------
 
 Description
@@ -358,8 +348,6 @@ Usage: LATEST(field [, time_field]). Return the latest value of a field based on
 
 * field: mandatory. The field to return the latest value for.
 * time_field: optional. The field to use for time-based ordering. Defaults to @timestamp if not specified.
-
-Note: This function requires Calcite to be enabled (see `Configuration`_ section above).
 
 Example::
 
@@ -394,45 +382,6 @@ Example with custom time field::
     | 2023-01-01 10:25:00 | cancelled  | Shutting down        | orders   | cancelled                  |
     | 2023-01-01 10:30:00 | inactive   | Maintenance mode     | users    | inactive                   |
     +---------------------+------------+----------------------+----------+----------------------------+
-
-
-Configuration
-=============
-This command requires Calcite enabled.
-
-Enable Calcite::
-
-	>> curl -H 'Content-Type: application/json' -X PUT localhost:9200/_plugins/_query/settings -d '{
-	  "transient" : {
-	    "plugins.calcite.enabled" : true
-	  }
-	}'
-
-Result set::
-
-    {
-      "acknowledged": true,
-      "persistent": {
-        "plugins": {
-          "calcite": {
-            "enabled": "true"
-          }
-        }
-      },
-      "transient": {}
-    }
-
-Usage
-=====
-
-Eventstats::
-
-    source = table | eventstats avg(a)
-    source = table | where a < 50 | eventstats count(c)
-    source = table | eventstats min(c), max(c) by b
-    source = table | eventstats count(c) as count_by by b | where count_by > 1000
-    source = table | eventstats dc(field) as distinct_count
-    source = table | eventstats distinct_count(category) by region
 
 
 Example 1: Calculate the average, sum and count of a field by group

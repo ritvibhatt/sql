@@ -24,10 +24,6 @@ an array can be stored in a non-array field in OpenSearch, when expanding a
 field storing a nested array, only the first element of the array will be
 flattened.
 
-Version
-=======
-3.1.0
-
 Syntax
 ======
 
@@ -116,15 +112,3 @@ Limitations
   invisible.
 
   As an alternative, you can change to ``source=my-index | flatten message``.
-
-* The command works only with Calcite enabled. This can be set with the
-  following command:
-
-  .. code-block::
-
-    PUT /_cluster/settings
-    {
-      "persistent":{
-          "plugins.calcite.enabled": true
-      }
-    }
